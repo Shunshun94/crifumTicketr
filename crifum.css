@@ -1,0 +1,60 @@
+@charset "utf-8";
+
+* {
+	box-sizing: border-box;
+	font-family: "BIZ UDゴシック","UD Shin Go NT Light JIS2004","UD デジタル 教科書体 N-R", Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "メイリオ", Meiryo, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "ＭＳ Ｐゴシック", sans-serif;
+}
+
+td {
+    width:40px;
+    height:60px;
+}
+
+.default table {
+    width: 1240px;
+    height: 874px;
+    background-image: url("./img/default/card.png");
+    padding-top:193px;
+    padding-left:69px;
+    padding-right:69px;
+    padding-bottom:140px;
+}
+
+.default td {
+    width:105px;
+    height: 107px;
+    position:relative;
+}
+
+.stump-img {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.default .stump-img {
+    position:absolute;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+}
+
+.default .stump-fumble-img {
+    background-image: url("./img/default/fumble.png");
+}
+
+.default .stump-critical-img {
+    background-image: url("./img/default/critical.png");
+}
+
+.default .stump-date {
+    position:absolute;
+    top:72px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    text-align:center;
+    color:white;
+    font-size:1.8em;
+}
