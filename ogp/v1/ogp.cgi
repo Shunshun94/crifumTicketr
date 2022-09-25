@@ -4,11 +4,6 @@ use Image::Magick;
 use CGI;
 $cgi = CGI::new();
 
-$xLength = 1200;
-$yLength = 846;
-$fontSize = $cgi->url_param('fontSize') || 20;
-
-# $imageType = $cgi->url_param('visual') || 'default';
 $cardPath = "../../img/default/card.png";
 $card = Image::Magick->new(magick => "png");
 $card->Read($cardPath);
@@ -16,24 +11,21 @@ $card->Read($cardPath);
 $criticalPath = "../../img/default/critical.png";
 $critical = Image::Magick->new(magick => "png");
 $critical->Read($criticalPath);
+$critical->Scale( width=>108, height=>108 );
 
 $fumblePath = "../../img/default/fumble.png";
 $fumble = Image::Magick->new(magick => "png");
 $fumble->Read($fumblePath);
+$fumble->Scale( width=>108, height=>108 );
 
-$card->Composite( image=>$critical, compose=>'over', x=>189, y=>303 );
-
-# x = 79  + 110 * n
-# y = 194 + 109 * n
-
+$card->Composite( image=>$fumble,   compose=>'over', x=>73,  y=>196 );
+$card->Composite( image=>$critical, compose=>'over', x=>181, y=>305 );
 
 print ("Content-type: image/png\n\n");
 binmode STDOUT;
-$card>Write("png:-");
+$card->Write("png:-");
 
 print "\n\n";
  
 undef $card;
-undef $critical;
-undef $fumble;
-exit();
+exit;
