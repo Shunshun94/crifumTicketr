@@ -1,5 +1,13 @@
 #!/usr/bin/perl
 
+use CGI;
+$cgi = CGI::new();
+$records = $cgi->url_param('record') || '';
+$url = $cgi->url;
+$url =~ s/index.cgi//;
+$ogpUrl = $url . "ogp/v1/ogp.cgi?record=" . $records;
+
+
 print "Content-type: text/html\n\n";
 print "<!DOCTYPE html>\n";
 print "<html>\n";
