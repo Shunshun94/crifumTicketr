@@ -5,6 +5,18 @@
 	font-family: "BIZ UDゴシック","UD Shin Go NT Light JIS2004","UD デジタル 教科書体 N-R", Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "メイリオ", Meiryo, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "ＭＳ Ｐゴシック", sans-serif;
 }
 
+
+#base {
+    position:relative;
+}
+
+#number {
+    position:absolute;
+    top:12px;
+    left:108px;
+    font-size:2em;
+}
+
 td {
     width:40px;
     height:60px;
@@ -12,7 +24,7 @@ td {
 
 footer {
     padding-top:8px;
-    font-size:60%;
+    font-size:80%;
     left:0px;
     right:0px;
     bottom:0px;
@@ -21,14 +33,18 @@ footer {
     width:100%;
 }
 
+footer > div {
+    padding:4px;
+}
+
 .default table {
     width: 1240px;
     height: 874px;
     background-image: url("./img/default/card.png");
-    padding-top:193px;
-    padding-left:69px;
-    padding-right:69px;
-    padding-bottom:140px;
+    padding-top:195px;
+    padding-left:72px;
+    padding-right:66px;
+    padding-bottom:138px;
 }
 
 .default td {

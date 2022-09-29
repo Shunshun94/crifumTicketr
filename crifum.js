@@ -5,11 +5,7 @@ const STUMP_CATEGORIES = {
 
 const draw_record_regexp = /([a-zA-Z]+)(\d\d)(\d\d)/;
 
-const draw = (params) => {
-    const base = document.getElementById('base');
-    base.className = params.get('visual') || 'default';
-    base.append(buildTable());
-
+const drawRecords = (params) => {
     const records = stumpList(params);
     records.forEach((d, i)=>{
         const stump = document.createElement('div');
@@ -26,6 +22,26 @@ const draw = (params) => {
 
         document.getElementById(`stump${numberToString(i)}`).append(stump);
     });
+    return records;
+}
+
+const drawNumber = (params) => {
+    const num = params.get('no') || '1';
+    const base = document.getElementById('base');
+    const numberDom = document.createElement('div');
+    numberDom.id = 'number';
+    numberDom.textContent = num;
+    base.append(numberDom);
+    return num;
+};
+
+const draw = (params) => {
+    const base = document.getElementById('base');
+    base.className = params.get('visual') || 'default';
+    base.append(buildTable());
+
+    drawRecords(params);
+    drawNumber(params);
 };
 
 const numberToString = (num) => {
@@ -79,7 +95,7 @@ const addInfo = (params) => {
     footer.append(developerInfo);
 
     const stumpBaseInfo = document.createElement('div');
-    stumpBaseInfo.innerHTML = `このツールはスタンプカードは @KIREI_TOILET さんがフリーで配布なさっているクリファンスタンプカードに着想を得て作成していますが、配布元とは無関係です（<a href="https://twitter.com/kirei_toilet/status/1290950684947304448" target="_blank">配布元</a>）`;
+    stumpBaseInfo.innerHTML = `このツールは <a href="https://twitter.com/kirei_toilet/" target="_blank">@KIREI_TOILET さん</a>がフリーで配布なさっているクリファンスタンプカードに着想を得て作成していますが、配布元とは無関係です`;
     footer.append(stumpBaseInfo);
 
     document.getElementById('base').append(footer);

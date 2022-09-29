@@ -7,6 +7,8 @@ $cgi = CGI::new();
 @records = split(/,/, ($cgi->url_param('record') || ''));
 $fontSize = 28;
 
+$no = $cgi->url_param('no') || '1';
+
 $cardPath = "../../img/default/card.png";
 $card = Image::Magick->new(magick => "png");
 $card->Read($cardPath);
@@ -20,6 +22,17 @@ $fumblePath = "../../img/default/fumble.png";
 $fumble = Image::Magick->new(magick => "png");
 $fumble->Read($fumblePath);
 $fumble->Scale( width=>108, height=>108 );
+
+$card->Annotate(
+    text=>$no,
+    x=>108,
+    y=>42,
+    fill=>"#000000",
+    strokewidth=>3,
+    antialias=>true,
+    font=>"../../font.ttf",
+    pointsize=>$fontSize
+);
 
 $count = 0;
 foreach my $record (@records) {

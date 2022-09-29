@@ -3,9 +3,10 @@
 use CGI;
 $cgi = CGI::new();
 $records = $cgi->url_param('record') || '';
+$no = $cgi->url_param('no') || '1';
 $url = $cgi->url;
 $url =~ s/index.cgi//;
-$ogpUrl = $url . "ogp/v1/ogp.cgi?record=" . $records;
+$ogpUrl = $url . "ogp/v1/ogp.cgi?record=" . $records . "&no=" . $no;
 
 
 print "Content-type: text/html\n\n";
