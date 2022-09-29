@@ -5,6 +5,7 @@ use CGI;
 $cgi = CGI::new();
 
 @records = split(/,/, ($cgi->url_param('record') || ''));
+$fontSize = 28;
 
 $cardPath = "../../img/default/card.png";
 $card = Image::Magick->new(magick => "png");
@@ -22,24 +23,34 @@ $fumble->Scale( width=>108, height=>108 );
 
 $count = 0;
 foreach my $record (@records) {
-    my $xPos = $count % 10;
-    my $yPos = int($count / 10);
+    my $xPos = (73  +    ($count % 10) * 110);
+    my $yPos = (196 + int($count / 10) * 110);
     if( $record =~ /\Ac/ ) {
         $card->Composite(
             image=>$critical,
             compose=>'over',
-            x=>(73  + $xPos * 110),
-            y=>(196 + $yPos * 110)
+            x=>$xPos,
+            y=>$yPos
         );
     }
     if( $record =~ /\Af/ ) {
         $card->Composite(
             image=>$fumble,
             compose=>'over',
-            x=>(73  + $xPos * 110),
-            y=>(196 + $yPos * 110)
+            x=>$xPos,
+            y=>$yPos
         );
     }
+    $card->Annotate(
+        text=>substr($record, 1, 2) . "/" . substr($record, 3),
+        x=>$xPos +  18,
+        y=>$yPos + 100,
+        fill=>"#000000",
+        strokewidth=>3,
+        antialias=>true,
+        font=>"../../font.ttf",
+        pointsize=>$fontSize
+    );
     $count++;
 }
 
