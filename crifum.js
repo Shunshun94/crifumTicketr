@@ -74,13 +74,14 @@ const stumpList = (params) => {
 const addInfo = (params) => {
     const footer = document.createElement('footer');
 
+    const developerInfo = document.createElement('div');
+    developerInfo.innerHTML = `<a href="https://twitter.com/Shunshun94" target="_blank">作者コンタクト</a> / <a href="https://github.com/Shunshun94/crifumTicketr" target="_blank">ソースコード</a> / <a href="https://amzn.asia/8mNqdKy" target="_blank">作者を支援する</a>`;
+    footer.append(developerInfo);
+
     const stumpBaseInfo = document.createElement('div');
-    const stumpBaseLink = document.createElement('a');
-    stumpBaseLink.href = 'https://twitter.com/kirei_toilet/status/1290950684947304448';
-    stumpBaseLink.textContent = 'スタンプカードは @KIREI_TOILET さんがフリーで配布なさっているクリファンスタンプカードです';
-    stumpBaseLink.target = '_blank';
-    stumpBaseInfo.append(stumpBaseLink);
+    stumpBaseInfo.innerHTML = `このツールはスタンプカードは @KIREI_TOILET さんがフリーで配布なさっているクリファンスタンプカードに着想を得て作成していますが、配布元とは無関係です（<a href="https://twitter.com/kirei_toilet/status/1290950684947304448" target="_blank">配布元</a>）`;
     footer.append(stumpBaseInfo);
+
     document.getElementById('base').append(footer);
 };
 

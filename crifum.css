@@ -10,6 +10,17 @@ td {
     height:60px;
 }
 
+footer {
+    padding-top:8px;
+    font-size:60%;
+    left:0px;
+    right:0px;
+    bottom:0px;
+    padding-top:12px;
+    background-color:#F4F4F4;
+    width:100%;
+}
+
 .default table {
     width: 1240px;
     height: 874px;
