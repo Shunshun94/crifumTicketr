@@ -5,9 +5,16 @@
 	font-family: "BIZ UDゴシック","UD Shin Go NT Light JIS2004","UD デジタル 教科書体 N-R", Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "メイリオ", Meiryo, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "ＭＳ Ｐゴシック", sans-serif;
 }
 
-
 #base {
     position:relative;
+}
+
+#name-request {
+    text-align:center;
+}
+
+#name-request-input {
+    font-size:2em;
 }
 
 #number {
@@ -15,6 +22,13 @@
     top:12px;
     left:108px;
     font-size:2em;
+}
+
+#name {
+    position:absolute;
+    top:800px;
+    left:130px;
+    font-size:1.5em;
 }
 
 td {

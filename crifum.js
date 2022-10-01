@@ -1,6 +1,11 @@
-const STUMP_CATEGORIES = {
-    c: 'critical',
-    f: 'fumble'
+const draw = (params) => {
+    const base = document.getElementById('base');
+    base.className = params.get('visual') || 'default';
+    base.append(buildTable());
+
+    drawRecords(params);
+    drawNumber(params);
+    drawName(params);
 };
 
 const draw_record_regexp = /([a-zA-Z]+)(\d\d)(\d\d)/;
@@ -35,17 +40,18 @@ const drawNumber = (params) => {
     return num;
 };
 
-const draw = (params) => {
-    const base = document.getElementById('base');
-    base.className = params.get('visual') || 'default';
-    base.append(buildTable());
-
-    drawRecords(params);
-    drawNumber(params);
-};
-
 const numberToString = (num) => {
     return String( num ).padStart(2, '0')
+};
+
+const drawName = (params) => {
+    const name = params.get('name') || '';
+    const $base = document.getElementById('base');
+    const $name = document.createElement('div');
+    $name.id = 'name';
+    $name.textContent = name;
+    $base.append($name);
+    return name;
 };
 
 const buildTable = () => {
@@ -66,6 +72,11 @@ const buildTable = () => {
         table.append(tr);
     });
     return table;
+};
+
+const STUMP_CATEGORIES = {
+    c: 'critical',
+    f: 'fumble'
 };
 
 const stumpList = (params) => {
@@ -101,9 +112,26 @@ const addInfo = (params) => {
     document.getElementById('base').append(footer);
 };
 
+const askName = (params) => {
+    document.getElementById('base').innerHTML = `
+        <p id="name-request">名前を入力してください（表示に使用します）<br/>
+        <input id="name-request-input" type="text" /><br/><br/>
+        <button id="name-request-send">この名前でカードを作成する！</button></p>
+    `;
+    document.getElementById('name-request-send').onclick = (e) => {
+        const name = document.getElementById('name-request-input').value;
+        const currentParam = location.search.slice(1);
+        location.href = `${location.origin}${location.pathname}?name=${name}&no=1&${currentParam}`;
+    };
+};
+
 const init = () => {
     const params = io.github.shunshun94.util.getQueries();
-    draw(params);
+    if(params.get('name')) {
+        draw(params);
+    } else {
+        askName(params);
+    }
     addInfo(params);
 }
 

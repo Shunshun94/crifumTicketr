@@ -8,6 +8,7 @@ $cgi = CGI::new();
 $fontSize = 28;
 
 $no = $cgi->url_param('no') || '1';
+$name = $cgi->url_param('name');
 
 $cardPath = "../../img/default/card.png";
 $card = Image::Magick->new(magick => "png");
@@ -27,6 +28,16 @@ $card->Annotate(
     text=>$no,
     x=>108,
     y=>42,
+    fill=>"#000000",
+    strokewidth=>3,
+    antialias=>true,
+    font=>"../../font.ttf",
+    pointsize=>$fontSize
+);
+$card->Annotate(
+    text=>$name,
+    x=>130,
+    y=>820,
     fill=>"#000000",
     strokewidth=>3,
     antialias=>true,
