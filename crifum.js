@@ -27,8 +27,62 @@ const drawRecords = (params) => {
 
         document.getElementById(`stump${numberToString(i)}`).append(stump);
     });
+    if(records.length < 50) {
+        appendNewStump(params, records);
+    } else {
+        appendNewSheet(params);
+    }
     return records;
-}
+};
+
+const appendNewSheet = (params) => {
+    const currentSheetNo = Number(params.get('no') || '1');
+    const base = document.getElementById('base');
+    const newSheet = document.createElement('div');
+    newSheet.id = 'newSheet';
+    newSheet.innerHTML = `<button id="newSheet-generate">次のスタンプカードを作る</button>`;
+    base.append(newSheet);
+    document.getElementById('newSheet-generate').onclick = (e) => {
+        const paramArray = [`no=${currentSheetNo + 1}`];
+        params.forEach((val, key)=>{
+            if(key === 'record' || key === 'no') {
+                return;
+            } else {
+                paramArray.push(`${key}=${val}`);
+            }
+        });
+        location.href = `${location.origin}${location.pathname}?${paramArray.join('&')}`;
+    };
+};
+
+const appendNewStump = (params, records) => {
+    const timeDiff = ((new Date()).getTimezoneOffset()) * 60 * 1000 * -1;
+    const currentDate = Number(new Date())
+    const today = (new Date(currentDate + timeDiff)).toISOString().slice(0, 10);
+    document.getElementById(`stump${numberToString(records.length)}`).innerHTML = `
+        <div id="new-stump">
+            <select id="new-stump-category">
+                <option value="c">クリティカル</option>
+                <option value="f">ファンブル</option>
+            </select>
+            <input type="date" id="new-stump-date" value="${today}"/>
+            <button id="new-stump-add">追加</button>
+        </div>
+    `;
+    document.getElementById('new-stump-add').onclick = (e) => {
+        const date = document.getElementById('new-stump-date').value;
+        const category = document.getElementById('new-stump-category').value;
+        params.set(
+            'record',
+            (params.has('record') ? `${params.get('record')},` : '') + `${category}${date.slice(5,7)}${date.slice(8)}`
+        );
+        const paramArray = [];
+        params.forEach((val, key)=>{
+            paramArray.push(`${key}=${val}`);
+        });
+        location.href = `${location.origin}${location.pathname}?${paramArray.join('&')}`;
+    };
+};
 
 const drawNumber = (params) => {
     const num = params.get('no') || '1';
