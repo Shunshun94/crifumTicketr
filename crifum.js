@@ -6,6 +6,7 @@ const draw = (params) => {
     drawRecords(params);
     drawNumber(params);
     drawName(params);
+    drawAccessories(params);
 };
 
 const draw_record_regexp = /([a-zA-Z]+)(\d\d)(\d\d)/;
@@ -106,6 +107,17 @@ const drawName = (params) => {
     $name.textContent = name;
     $base.append($name);
     return name;
+};
+
+const drawAccessories = (params) => {
+    const $base = document.getElementById('base');
+    const newButton = document.createElement('button');
+    newButton.id = 'newButton';
+    newButton.textContent = '新しいクリティカル・ファンブル スタンプカードを作る';
+    $base.append(newButton);
+    newButton.onclick = (e) => {
+        location.href = `${location.origin}${location.pathname}`;
+    };
 };
 
 const buildTable = () => {
