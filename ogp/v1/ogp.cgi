@@ -3,6 +3,7 @@
 use Image::Magick;
 use CGI;
 $cgi = CGI::new();
+$directory = "default";
 
 @records = split(/,/, ($cgi->url_param('record') || ''));
 $fontSize = 28;
@@ -10,23 +11,23 @@ $fontSize = 28;
 $no = $cgi->url_param('no') || '1';
 $name = $cgi->url_param('name');
 
-$cardPath = "../../img/default/card.png";
+$cardPath = "../../img/$directory/card.png";
 $card = Image::Magick->new(magick => "png");
 $card->Read($cardPath);
 
-$criticalPath = "../../img/default/critical.png";
+$criticalPath = "../../img/$directory/critical.png";
 $critical = Image::Magick->new(magick => "png");
 $critical->Read($criticalPath);
 $critical->Scale( width=>108, height=>108 );
 
-$fumblePath = "../../img/default/fumble.png";
+$fumblePath = "../../img/$directory/fumble.png";
 $fumble = Image::Magick->new(magick => "png");
 $fumble->Read($fumblePath);
 $fumble->Scale( width=>108, height=>108 );
 
 $card->Annotate(
     text=>$no,
-    x=>108,
+    x=>322,
     y=>42,
     fill=>"#000000",
     strokewidth=>3,
@@ -36,7 +37,7 @@ $card->Annotate(
 );
 $card->Annotate(
     text=>$name,
-    x=>130,
+    x=>344,
     y=>820,
     fill=>"#000000",
     strokewidth=>3,
@@ -47,7 +48,7 @@ $card->Annotate(
 
 $count = 0;
 foreach my $record (@records) {
-    my $xPos = (73  +    ($count % 10) * 110);
+    my $xPos = (287  +    ($count % 10) * 110);
     my $yPos = (196 + int($count / 10) * 110);
     if( $record =~ /\Ac/ ) {
         $card->Composite(
