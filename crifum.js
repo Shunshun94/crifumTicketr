@@ -7,6 +7,24 @@ const draw = (params) => {
     drawNumber(params);
     drawName(params);
     drawAccessories(params);
+    drawVisual(params);
+};
+
+const drawVisual = (params) => {
+    const bgColor = params.get('bgcolor') || '#FFFFFF';
+    const bgImage = params.get('bgimage') || '';
+    const cardImage = params.get('cardimage') || './img/default/card.png';
+    console.log(bgColor, '・',  bgImage, '・', cardImage);
+    const base = document.getElementById('base');
+    const table = base.getElementsByTagName('table')[0];
+
+    table.style.backgroundColor = bgColor;
+    if(bgImage) {
+        base.style.backgroundImage = `url(${bgImage})`;
+        console.log(base.style.backgroundImage);
+    }
+    table.style.backgroundImage = `url("${cardImage}")`;
+    console.log(table.style.backgroundImage);
 };
 
 const draw_record_regexp = /([a-zA-Z]+)(\d\d)(\d\d)/;
@@ -175,7 +193,7 @@ const addInfo = (params) => {
     stumpBaseInfo.innerHTML = `このツールは <a href="https://twitter.com/kirei_toilet/" target="_blank">@KIREI_TOILET さん</a>がフリーで配布なさっているクリファンスタンプカードに着想を得て作成していますが、配布元とは無関係です`;
     footer.append(stumpBaseInfo);
 
-    document.getElementById('base').append(footer);
+    document.getElementsByTagName('body')[0].append(footer);
 };
 
 const askName = (params) => {

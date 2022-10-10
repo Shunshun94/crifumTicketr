@@ -72,7 +72,9 @@ footer > div {
     width: 1669px;
     height: 874px;
     left: -214px;
-    background-image: url("./img/default/card.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
     padding-top:195px;
     padding-left:286px;
     padding-right:280px;
