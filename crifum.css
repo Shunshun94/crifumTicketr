@@ -68,7 +68,7 @@ footer > div {
 }
 
 .default table {
-    position:absolute;
+    position:relative;
     width: 1669px;
     height: 874px;
     left: -214px;
